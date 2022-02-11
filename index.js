@@ -12,19 +12,6 @@ const configObject = {
   qrTimeout: 0,
 };
 
-const chromeOptions = {
-    headless: true,
-    defaultViewport: null,
-    args: [
-        "--incognito",
-        "--no-sandbox",
-        "--single-process",
-        "--no-zygote"
-    ],
-};
-const browser = await puppeteer.launch(chromeOptions);
-const page = await browser.newPage();
-
 const startBot = async () => {
   try {
     const Handler = require('./handler');

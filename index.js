@@ -12,10 +12,18 @@ const configObject = {
   qrTimeout: 0,
 };
 
-const ops = process.platform;
-if (ops === 'win32' || ops === 'win64') configObject['executeablePath'] = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe';
-else if (ops === 'linux') configObject['executeablePath'] = '/usr/bin/google-chrome-stable';
-else if (ops === 'darwin') configObject['executeablePath'] = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const chromeOptions = {
+    headless: true,
+    defaultViewport: null,
+    args: [
+        "--incognito",
+        "--no-sandbox",
+        "--single-process",
+        "--no-zygote"
+    ],
+};
+const browser = await puppeteer.launch(chromeOptions);
+const page = await browser.newPage();
 
 const startBot = async () => {
   try {
